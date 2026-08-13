@@ -17,22 +17,21 @@ interface GalleryItem {
 
 const galleryImages: GalleryItem[] = [
   {
-    src: `${BASE}assets/gallery-1.jpg`,
+    src: `${BASE}assets/interior1.png`,
     alt: 'WYLI Studio Interior',
     label: 'Our Space',
     span: 'col-span-2 row-span-2',
     isPlaceholder: false,
   },
   {
-    src: `${BASE}assets/gallery-2.jpg`,
     alt: 'WYLI Hair Session',
     label: 'The Cut',
     span: 'col-span-1 row-span-1',
-    isPlaceholder: false,
+    isPlaceholder: true,
   },
   {
-    src: `${BASE}assets/gallery-3.jpg`,
-    alt: 'WYLI Premium Products',
+    src: `${BASE}assets/interior2.png`,
+    alt: 'WYLI Studio Ambiance',
     label: 'The Lounge',
     span: 'col-span-1 row-span-2',
     isPlaceholder: false,
@@ -117,6 +116,8 @@ export default function GalleryPage() {
                     <div
                       className="absolute inset-[-10%] bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
                       style={{ backgroundImage: `url(${img.src})` }}
+                      role="img"
+                      aria-label={img.alt}
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
                       <span className="font-sans text-xs uppercase tracking-widest text-white">

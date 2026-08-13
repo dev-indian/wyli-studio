@@ -1,13 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from '@/animations/gsap';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-const images = [
-  { src: '/assets/gallery-1.jpg', alt: 'WYLI Studio Interior',    span: 'col-span-2 row-span-2' },
-  { src: '/assets/gallery-2.jpg', alt: 'WYLI Hair Session',       span: 'col-span-1 row-span-1' },
-  { src: '/assets/gallery-3.jpg', alt: 'WYLI Premium Products',  span: 'col-span-1 row-span-1' },
-  { src: '/assets/gallery-4.jpg', alt: 'WYLI Grooming Experience',span: 'col-span-1 row-span-2' },
-  { src: '/assets/gallery-5.jpg', alt: 'WYLI Studio Ambiance',    span: 'col-span-1 row-span-1' },
-  { src: '/assets/gallery-6.jpg', alt: 'WYLI Stylist at Work',    span: 'col-span-1 row-span-1' },
+import { X, ChevronLeft, ChevronRight, ImageOff } from 'lucide-react';
+
+interface GalleryImage {
+  src?: string;
+  alt: string;
+  span: string;
+  isPlaceholder?: boolean;
+}
+
+const images: GalleryImage[] = [
+  { src: '/assets/interior1.png', alt: 'WYLI Studio Interior',    span: 'col-span-2 row-span-2' },
+  { alt: 'WYLI Hair Session',        span: 'col-span-1 row-span-1', isPlaceholder: true },
+  { alt: 'WYLI Premium Products',    span: 'col-span-1 row-span-1', isPlaceholder: true },
+  { src: '/assets/interior2.png', alt: 'WYLI Studio Ambiance',    span: 'col-span-1 row-span-2' },
+  { alt: 'WYLI Grooming Experience', span: 'col-span-1 row-span-1', isPlaceholder: true },
+  { alt: 'WYLI Stylist at Work',     span: 'col-span-1 row-span-1', isPlaceholder: true },
 ];
 
 const isDesktop = () =>
@@ -66,10 +74,12 @@ export default function Gallery() {
     }
   }, []);
 
+  const realImages = images.filter((img) => !img.isPlaceholder);
+
   const openLightbox  = (i: number) => { setCurrentIndex(i); setLightboxOpen(true);  document.body.style.overflow = 'hidden'; };
   const closeLightbox = ()            => { setLightboxOpen(false); document.body.style.overflow = ''; };
-  const nextImage     = (e: React.MouseEvent) => { e.stopPropagation(); setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1)); };
-  const prevImage     = (e: React.MouseEvent) => { e.stopPropagation(); setCurrentIndex((p) => (p === 0 ? images.length - 1 : p - 1)); };
+  const nextImage     = (e: React.MouseEvent) => { e.stopPropagation(); setCurrentIndex((p) => (p === realImages.length - 1 ? 0 : p + 1)); };
+  const prevImage     = (e: React.MouseEvent) => { e.stopPropagation(); setCurrentIndex((p) => (p === 0 ? realImages.length - 1 : p - 1)); };
 
   return (
     <section id="gallery" ref={sectionRef} className="py-24 bg-background">
@@ -88,26 +98,41 @@ export default function Gallery() {
           {images.map((img, i) => (
             <div
               key={i}
-              className={`gallery-img-container relative overflow-hidden group cursor-pointer ${img.span}`}
-              onClick={() => openLightbox(i)}
+              className={`gallery-img-container relative overflow-hidden group ${img.isPlaceholder ? '' : 'cursor-pointer'} ${img.span}`}
+              onClick={() => {
+                if (!img.isPlaceholder) openLightbox(realImages.indexOf(img));
+              }}
             >
-              {/* Inner wrapper for parallax — separate from the reveal element */}
-              <div
-                className="gallery-img-inner absolute inset-[-10%] bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-                style={{ backgroundImage: `url(${img.src})` }}
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                <span className="font-sans text-xs uppercase tracking-widest text-white border border-white/30 px-4 py-2 backdrop-blur-sm">
-                  View
-                </span>
-              </div>
+              {img.isPlaceholder ? (
+                <div className="absolute inset-0 bg-card border border-dashed border-white/15 flex flex-col items-center justify-center gap-3">
+                  <ImageOff size={24} className="text-white/20" aria-hidden="true" />
+                  <span className="text-[10px] font-sans uppercase tracking-widest text-white/20">
+                    Coming Soon
+                  </span>
+                </div>
+              ) : (
+                <>
+                  {/* Inner wrapper for parallax — separate from the reveal element */}
+                  <div
+                    className="gallery-img-inner absolute inset-[-10%] bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${img.src})` }}
+                    role="img"
+                    aria-label={img.alt}
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                    <span className="font-sans text-xs uppercase tracking-widest text-white border border-white/30 px-4 py-2 backdrop-blur-sm">
+                      View
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>
       </div>
 
       {/* Lightbox */}
-      {lightboxOpen && (
+      {lightboxOpen && realImages[currentIndex] && (
         <div
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl flex items-center justify-center"
           onClick={closeLightbox}
@@ -120,12 +145,14 @@ export default function Gallery() {
           </button>
           <div className="w-full max-w-5xl px-16 h-[80vh] flex flex-col justify-center items-center" onClick={(e) => e.stopPropagation()}>
             <img
-              src={images[currentIndex].src}
-              alt={images[currentIndex].alt}
+              src={realImages[currentIndex].src}
+              alt={realImages[currentIndex].alt}
               className="max-h-full max-w-full object-contain shadow-2xl"
+              loading="lazy"
+              decoding="async"
             />
             <p className="text-primary font-sans uppercase tracking-widest mt-6 text-sm">
-              {images[currentIndex].alt}
+              {realImages[currentIndex].alt}
             </p>
           </div>
           <button className="absolute right-8 top-1/2 translate-x-1/2 text-foreground/50 hover:text-foreground p-4 transition-colors" onClick={nextImage}>

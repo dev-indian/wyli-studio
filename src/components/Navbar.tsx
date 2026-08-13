@@ -13,7 +13,7 @@ import { Menu, X } from 'lucide-react';
 import { gsap } from '@/animations/gsap';
 
 const BASE = import.meta.env.BASE_URL;
-const LOGO_SRC = `${BASE}assets/logo.jpg`;
+const LOGO_SRC = `${BASE}assets/wylilogo.png`;
 
 const NAV_LINKS = [
   { label: 'Home',         href: '/'             },
