@@ -6,11 +6,21 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from '@/animations/gsap';
-const servicesList = [
-  { name: 'Hair Services',   category: 'Hair',    tag: 'All',    desc: 'Cuts, styling, coloring, spa & treatments',   img: '/assets/service-haircut.jpg' },
-  { name: 'Skin Care',       category: 'Skin',    tag: 'All',    desc: 'Facials, de-tan, clean-ups & rejuvenation',  img: '/assets/service-facial.jpg'  },
-  { name: 'Grooming',        category: 'Grooming', tag: 'Men',  desc: 'Precision cuts, beard styling & more',       img: '/assets/service-spa.jpg'     },
-  { name: 'Makeup',          category: 'Makeup',  tag: 'Women', desc: 'Bridal, party & everyday glam',              img: '/assets/service-styling.jpg' },
+import { Scissors, Droplets, Brush, Palette, type LucideIcon } from 'lucide-react';
+
+interface Service {
+  name: string;
+  category: string;
+  tag: string;
+  desc: string;
+  Icon: LucideIcon;
+}
+
+const servicesList: Service[] = [
+  { name: 'Hair Services',   category: 'Hair',    tag: 'All',    desc: 'Cuts, styling, coloring, spa & treatments',  Icon: Scissors },
+  { name: 'Skin Care',       category: 'Skin',    tag: 'All',    desc: 'Facials, de-tan, clean-ups & rejuvenation',  Icon: Droplets },
+  { name: 'Grooming',        category: 'Grooming', tag: 'Men',  desc: 'Precision cuts, beard styling & more',       Icon: Brush },
+  { name: 'Makeup',          category: 'Makeup',  tag: 'Women', desc: 'Bridal, party & everyday glam',              Icon: Palette },
 ];
 
 export default function Services() {
@@ -105,11 +115,17 @@ export default function Services() {
               onMouseLeave={handleMouseLeave}
               style={{ transformStyle: 'preserve-3d' }}
             >
-               {/* Background Image */}
-               <div 
-                 className="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-60"
-                 style={{ backgroundImage: `url(${service.img})` }}
-               />
+               {/* Background treatment — brand gradient + category icon (no photo asset yet) */}
+               <div
+                 className="absolute inset-0 w-full h-full bg-gradient-to-br from-muted via-background to-muted transition-transform duration-700 group-hover:scale-110"
+                 aria-hidden="true"
+               >
+                 <service.Icon
+                   className="absolute right-6 bottom-24 text-primary/15 group-hover:text-primary/25 transition-colors duration-500"
+                   size={120}
+                   strokeWidth={1}
+                 />
+               </div>
                
                {/* Gradient Overlay */}
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

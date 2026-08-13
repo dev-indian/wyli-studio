@@ -108,13 +108,15 @@ export default function About() {
           </div>
 
           <div className="col-span-1 lg:col-span-6 lg:col-start-7 order-1 lg:order-2">
-            <div 
+            <div
               ref={imageRef}
+              role="img"
+              aria-label="Interior of WYLI Glow & Grooming Studio"
               className="relative w-full aspect-[4/5] overflow-hidden bg-muted"
             >
-              <div 
+              <div
                 className="about-img-inner absolute inset-0 w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url('/assets/about.jpg')` }}
+                style={{ backgroundImage: `url('/assets/interior2.png')` }}
               />
               {/* Subtle overlay for depth */}
               <div className="absolute inset-0 bg-black/5 mix-blend-multiply" />
