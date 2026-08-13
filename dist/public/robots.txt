@@ -1,8 +1,0 @@
-# robots.txt — WYLI Salon
-# https://wyli.in
-
-User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://wyli.in/sitemap.xml

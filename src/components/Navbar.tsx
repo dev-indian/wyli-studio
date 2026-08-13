@@ -76,12 +76,12 @@ export default function Navbar() {
       <nav
         className={`wyli-navbar fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500
           ${scrolled ? 'top-2' : 'top-4'}
-          bg-black/40 backdrop-blur-xl border border-white/10
-          rounded-full shadow-2xl shadow-black/30
+          bg-white/80 backdrop-blur-md border border-black/5
+          rounded-full shadow-sm shadow-black/5
           flex items-center gap-0
           max-w-[calc(100vw-1.5rem)] w-auto
           ${scrolled ? 'px-3 py-1.5' : 'px-4 py-2'}`}
-        style={{ opacity: 0 }}   /* GSAP sets to 1 on mount */
+        style={{ opacity: 0 }}
       >
         {/* Logo + brand name */}
         <Link
@@ -109,7 +109,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`relative px-3 py-1 font-sans text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 whitespace-nowrap
-                  ${isActive ? 'text-primary' : 'text-white/70 hover:text-white'}`}
+                  ${isActive ? 'text-primary' : 'text-foreground/60 hover:text-foreground'}`}
                 onClick={(e) => handleLink(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href)}
               >
                 {link.label}
@@ -154,7 +154,7 @@ export default function Navbar() {
           <Link
             key={link.href}
             href={link.href}
-            className="wyli-mobile-link font-serif text-2xl text-white/80 hover:text-primary
+            className="wyli-mobile-link font-serif text-2xl text-foreground/80 hover:text-primary
               tracking-[0.15em] uppercase opacity-0 transition-colors duration-200"
             onClick={(e) => handleLink(e as unknown as React.MouseEvent<HTMLAnchorElement>, link.href)}
           >

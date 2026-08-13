@@ -3,7 +3,7 @@ import { SiInstagram, SiWhatsapp } from 'react-icons/si';
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 bg-background border-t border-white/5">
+    <section id="contact" className="py-24 bg-background border-t border-black/5">
       <div className="container mx-auto px-6 md:px-12">
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-8">
@@ -50,7 +50,7 @@ export default function Contact() {
           </div>
 
           {/* Map Embed */}
-          <div className="lg:col-span-1 h-[400px] lg:h-auto bg-card rounded-sm overflow-hidden border border-white/5 relative grayscale-[0.5] contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+          <div className="lg:col-span-1 h-[400px] lg:h-auto bg-background rounded-sm overflow-hidden border border-black/5 relative grayscale-[0.3] contrast-110 opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.0883204938!2d82.90870691523438!3d25.3176451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db76febcf4d%3A0x68131710853ff0b5!2sVaranasi%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1709664532148!5m2!1sen!2sin" 
               width="100%" 
@@ -73,7 +73,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mr-4 group-hover:border-primary transition-colors">
+                <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center mr-4 group-hover:border-primary transition-colors">
                   <SiInstagram className="text-foreground group-hover:text-primary transition-colors" size={20} />
                 </div>
                 <span className="font-sans text-sm text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-widest">
@@ -87,7 +87,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mr-4 group-hover:border-primary transition-colors">
+                <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center mr-4 group-hover:border-primary transition-colors">
                   <SiWhatsapp className="text-foreground group-hover:text-primary transition-colors" size={20} />
                 </div>
                 <span className="font-sans text-sm text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-widest">

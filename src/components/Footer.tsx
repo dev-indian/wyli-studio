@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-background pt-16 pb-8 border-t border-white/5 relative overflow-hidden"
+      className="bg-background pt-16 pb-8 border-t border-black/5 relative overflow-hidden"
     >
       <div className="container mx-auto px-6 text-center">
 
@@ -86,7 +86,7 @@ export default function Footer() {
         </div>
 
         <div
-          className="footer-copy text-xs font-sans text-muted-foreground/50 tracking-wider"
+          className="footer-copy text-xs font-sans text-muted-foreground/60 tracking-wider"
           style={{ opacity: 0 }}
         >
           &copy; {new Date().getFullYear()} WYLI GLOW & GROOMING STUDIO. ALL RIGHTS RESERVED.

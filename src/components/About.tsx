@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '@/animations/gsap';
 import { splitAndAnimate } from '@/animations/splitText';
-import aboutImg from '@assets/generated_images/about.jpg';
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -115,10 +114,10 @@ export default function About() {
             >
               <div 
                 className="about-img-inner absolute inset-0 w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${aboutImg})` }}
+                style={{ backgroundImage: `url('/assets/about.jpg')` }}
               />
               {/* Subtle overlay for depth */}
-              <div className="absolute inset-0 bg-black/20 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-black/5 mix-blend-multiply" />
             </div>
             
             {/* Decorative element */}

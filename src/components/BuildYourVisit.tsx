@@ -37,7 +37,7 @@ export default function BuildYourVisit() {
   };
 
   return (
-    <section id="build-your-visit" className="py-24 bg-background relative overflow-hidden border-t border-white/5">
+    <section id="build-your-visit" className="py-24 bg-background relative overflow-hidden border-t border-black/5">
       <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-tr from-primary/5 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
@@ -65,7 +65,7 @@ export default function BuildYourVisit() {
                   className={`px-4 py-2 text-xs uppercase tracking-widest border transition-all duration-200 ${
                     gender === g
                       ? 'border-primary bg-primary/10 text-primary'
-                      : 'border-white/10 text-muted-foreground hover:border-primary/50'
+                      : 'border-black/10 text-muted-foreground hover:border-primary/50'
                   }`}
                 >
                   {g}
@@ -82,7 +82,7 @@ export default function BuildYourVisit() {
                   className={`px-4 py-2 text-xs uppercase tracking-widest border transition-all duration-200 ${
                     activeCategory === cat
                       ? 'border-primary bg-primary/10 text-primary'
-                      : 'border-white/10 text-muted-foreground hover:border-primary/50'
+                      : 'border-black/10 text-muted-foreground hover:border-primary/50'
                   }`}
                 >
                   {cat}
@@ -97,15 +97,15 @@ export default function BuildYourVisit() {
                 return (
                   <div
                     key={svc.id}
-                    className="group border border-white/5 hover:border-primary/30 transition-all duration-300 p-5 bg-card/30 flex flex-col"
+                    className="group border border-black/5 hover:border-primary/30 transition-all duration-300 p-5 bg-background flex flex-col"
                   >
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <span className="text-[10px] uppercase tracking-widest text-primary/70">{svc.category}</span>
-                        <h4 className="font-serif text-lg text-foreground">{svc.name}</h4>
-                      </div>
-                      <span className="text-xs text-muted-foreground border border-white/10 px-2 py-1">{svc.gender}</span>
-                    </div>
+                     <div className="flex items-start justify-between mb-3">
+                       <div>
+                         <span className="text-[10px] uppercase tracking-widest text-primary/70">{svc.category}</span>
+                         <h4 className="font-serif text-lg text-foreground">{svc.name}</h4>
+                       </div>
+                       <span className="text-xs text-muted-foreground border border-black/10 px-2 py-1">{svc.gender}</span>
+                     </div>
                     <p className="text-xs text-muted-foreground font-light leading-relaxed mb-4 flex-1">{svc.description}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 text-xs text-muted-foreground">
@@ -118,14 +118,14 @@ export default function BuildYourVisit() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => updateQuantity(svc.id, inCart.quantity - 1)}
-                            className="w-7 h-7 border border-white/10 flex items-center justify-center hover:border-primary transition-colors"
+                            className="w-7 h-7 border border-black/10 flex items-center justify-center hover:border-primary transition-colors"
                           >
                             <Minus size={12} />
                           </button>
-                          <span className="text-xs w-6 text-center">{inCart.quantity}</span>
+                            <span className="text-xs w-6 text-center">{inCart.quantity}</span>
                           <button
                             onClick={() => updateQuantity(svc.id, inCart.quantity + 1)}
-                            className="w-7 h-7 border border-white/10 flex items-center justify-center hover:border-primary transition-colors"
+                            className="w-7 h-7 border border-black/10 flex items-center justify-center hover:border-primary transition-colors"
                           >
                             <Plus size={12} />
                           </button>
@@ -147,15 +147,15 @@ export default function BuildYourVisit() {
 
           {/* Right — Cart summary */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 border border-white/5 bg-card/50 p-6">
+            <div className="sticky top-24 border border-black/5 bg-background p-6">
               <h3 className="font-serif text-xl text-foreground mb-4">Your Visit</h3>
 
               {draft.items.length === 0 ? (
                 <p className="text-sm text-muted-foreground mb-6">No services selected yet. Start building your visit.</p>
               ) : (
                 <div className="space-y-3 mb-6 max-h-[300px] overflow-y-auto">
-                  {draft.items.map((item) => (
-                    <div key={item.service.id} className="flex items-start justify-between gap-2 border-b border-white/5 pb-3">
+                    {draft.items.map((item) => (
+                      <div key={item.service.id} className="flex items-start justify-between gap-2 border-b border-black/5 pb-3">
                       <div className="flex-1">
                         <p className="text-sm text-foreground">{item.service.name}</p>
                         <p className="text-xs text-muted-foreground">₹{item.service.price} × {item.quantity}</p>
@@ -173,7 +173,7 @@ export default function BuildYourVisit() {
               )}
 
               {draft.items.length > 0 && (
-                <div className="space-y-2 mb-6 pt-4 border-t border-white/5">
+                <div className="space-y-2 mb-6 pt-4 border-t border-black/5">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Total Duration</span>
                     <span className="text-foreground font-medium">{formatDuration(totalDuration)}</span>

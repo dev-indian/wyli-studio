@@ -50,7 +50,7 @@ function Router() {
 
 function App() {
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('dark');
     const lenis = initLenis();
     return () => { lenis.destroy(); };
   }, []);

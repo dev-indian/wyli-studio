@@ -141,7 +141,7 @@ export default function FindYourWYLI() {
           </p>
         </div>
 
-        <div className="glass-panel p-8 md:p-12 relative">
+         <div className="bg-background border border-black/5 p-8 md:p-12 relative">
           {/* Step 1 */}
           {step === 1 && (
             <div className="fyw-step-1">
@@ -153,7 +153,7 @@ export default function FindYourWYLI() {
                   <button
                     key={opt.value}
                     onClick={() => { setCategory(opt.value); handleStart(); }}
-                    className="group flex flex-col items-center justify-center p-6 border border-white/10 hover:border-primary/50 transition-all duration-300 hover:bg-primary/5"
+                    className="group flex flex-col items-center justify-center p-6 border border-black/10 hover:border-primary/50 transition-all duration-300 hover:bg-primary/5"
                   >
                     <span className="text-2xl mb-3 text-primary/70 group-hover:text-primary transition-colors">{opt.icon}</span>
                     <span className="font-sans text-xs uppercase tracking-widest text-foreground/80 group-hover:text-primary transition-colors">{opt.label}</span>
@@ -174,7 +174,7 @@ export default function FindYourWYLI() {
                   <button
                     key={opt}
                     onClick={() => handleStep2(opt)}
-                    className="p-4 border border-white/10 hover:border-primary/50 transition-all duration-300 hover:bg-primary/5 text-center"
+                    className="p-4 border border-black/10 hover:border-primary/50 transition-all duration-300 hover:bg-primary/5 text-center"
                   >
                     <span className="font-sans text-sm uppercase tracking-widest text-foreground/80 group-hover:text-primary">{opt}</span>
                   </button>
@@ -199,7 +199,7 @@ export default function FindYourWYLI() {
                   <button
                     key={opt}
                     onClick={() => handleStep3(opt)}
-                    className="p-4 border border-white/10 hover:border-primary/50 transition-all duration-300 hover:bg-primary/5 text-center"
+                    className="p-4 border border-black/10 hover:border-primary/50 transition-all duration-300 hover:bg-primary/5 text-center"
                   >
                     <span className="font-sans text-sm uppercase tracking-widest text-foreground/80">{opt}</span>
                   </button>
@@ -230,7 +230,7 @@ export default function FindYourWYLI() {
                     className={`cursor-pointer border transition-all duration-300 p-6 text-center ${
                       selected.includes(svc.id)
                         ? 'border-primary bg-primary/10'
-                        : 'border-white/10 hover:border-primary/50'
+                        : 'border-black/10 hover:border-primary/50'
                     }`}
                   >
                     {selected.includes(svc.id) && (

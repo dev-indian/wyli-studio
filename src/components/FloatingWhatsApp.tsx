@@ -29,11 +29,11 @@ export default function FloatingWhatsApp() {
     <div className="fixed bottom-6 right-6 z-[200] flex flex-col items-end gap-2">
       {/* Tooltip */}
       {showTooltip && (
-        <div className="flex items-center gap-2 bg-black/80 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 shadow-xl animate-in fade-in slide-in-from-bottom-2 duration-200">
-          <span className="text-xs font-sans text-white whitespace-nowrap">Chat with us on WhatsApp</span>
+        <div className="flex items-center gap-2 bg-white/90 backdrop-blur-md border border-black/5 rounded-full px-4 py-2 shadow-lg animate-in fade-in slide-in-from-bottom-2 duration-200">
+          <span className="text-xs font-sans text-foreground whitespace-nowrap">Chat with us on WhatsApp</span>
           <button
             onClick={() => setShowTooltip(false)}
-            className="text-white/50 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Close"
           >
             <X size={12} />
@@ -47,7 +47,7 @@ export default function FloatingWhatsApp() {
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         aria-label="Chat with WYLI Glow & Grooming Studio on WhatsApp"
-        className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-green-500/30 hover:shadow-2xl active:scale-95"
+        className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-95"
         style={{
           background: 'linear-gradient(135deg, #25D366, #128C7E)',
         }}

@@ -1,20 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from '@/animations/gsap';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import g1 from '@assets/generated_images/gallery-1.jpg';
-import g2 from '@assets/generated_images/gallery-2.jpg';
-import g3 from '@assets/generated_images/gallery-3.jpg';
-import g4 from '@assets/generated_images/gallery-4.jpg';
-import g5 from '@assets/generated_images/gallery-5.jpg';
-import g6 from '@assets/generated_images/gallery-6.jpg';
-
 const images = [
-  { src: g1, alt: 'WYLI Studio Interior',    span: 'col-span-2 row-span-2' },
-  { src: g2, alt: 'WYLI Hair Session',       span: 'col-span-1 row-span-1' },
-  { src: g3, alt: 'WYLI Premium Products',   span: 'col-span-1 row-span-1' },
-  { src: g4, alt: 'WYLI Grooming Experience',span: 'col-span-1 row-span-2' },
-  { src: g5, alt: 'WYLI Studio Ambiance',    span: 'col-span-1 row-span-1' },
-  { src: g6, alt: 'WYLI Stylist at Work',    span: 'col-span-1 row-span-1' },
+  { src: '/assets/gallery-1.jpg', alt: 'WYLI Studio Interior',    span: 'col-span-2 row-span-2' },
+  { src: '/assets/gallery-2.jpg', alt: 'WYLI Hair Session',       span: 'col-span-1 row-span-1' },
+  { src: '/assets/gallery-3.jpg', alt: 'WYLI Premium Products',  span: 'col-span-1 row-span-1' },
+  { src: '/assets/gallery-4.jpg', alt: 'WYLI Grooming Experience',span: 'col-span-1 row-span-2' },
+  { src: '/assets/gallery-5.jpg', alt: 'WYLI Studio Ambiance',    span: 'col-span-1 row-span-1' },
+  { src: '/assets/gallery-6.jpg', alt: 'WYLI Stylist at Work',    span: 'col-span-1 row-span-1' },
 ];
 
 const isDesktop = () =>
@@ -79,7 +72,7 @@ export default function Gallery() {
   const prevImage     = (e: React.MouseEvent) => { e.stopPropagation(); setCurrentIndex((p) => (p === 0 ? images.length - 1 : p - 1)); };
 
   return (
-    <section id="gallery" ref={sectionRef} className="py-24 bg-card">
+    <section id="gallery" ref={sectionRef} className="py-24 bg-background">
       <div className="container mx-auto px-4 md:px-8">
 
         <div className="gallery-heading flex justify-between items-end mb-16 px-4" style={{ opacity: 0 }}>
@@ -119,10 +112,10 @@ export default function Gallery() {
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl flex items-center justify-center"
           onClick={closeLightbox}
         >
-          <button className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors" onClick={closeLightbox}>
+          <button className="absolute top-8 right-8 text-foreground/50 hover:text-foreground transition-colors" onClick={closeLightbox}>
             <X size={32} />
           </button>
-          <button className="absolute left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors p-4" onClick={prevImage}>
+          <button className="absolute left-8 top-1/2 -translate-x-1/2 text-foreground/50 hover:text-foreground p-4 transition-colors" onClick={prevImage}>
             <ChevronLeft size={48} strokeWidth={1} />
           </button>
           <div className="w-full max-w-5xl px-16 h-[80vh] flex flex-col justify-center items-center" onClick={(e) => e.stopPropagation()}>
@@ -135,7 +128,7 @@ export default function Gallery() {
               {images[currentIndex].alt}
             </p>
           </div>
-          <button className="absolute right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors p-4" onClick={nextImage}>
+          <button className="absolute right-8 top-1/2 translate-x-1/2 text-foreground/50 hover:text-foreground p-4 transition-colors" onClick={nextImage}>
             <ChevronRight size={48} strokeWidth={1} />
           </button>
         </div>

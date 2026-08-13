@@ -34,9 +34,9 @@ export default function PremiumExperience() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-background relative overflow-hidden border-y border-white/5">
+    <section ref={sectionRef} className="py-24 bg-background relative overflow-hidden border-y border-black/5">
       {/* Decorative large text background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-serif font-bold text-white/[0.02] whitespace-nowrap pointer-events-none select-none tracking-tighter">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-serif font-bold text-foreground/[0.03] whitespace-nowrap pointer-events-none select-none tracking-tighter">
           WYLI
         </div>
 
@@ -54,9 +54,9 @@ export default function PremiumExperience() {
           {standards.map((item, index) => (
             <div 
               key={index}
-              className="standard-card bg-card/50 backdrop-blur-sm border-t border-primary/30 p-8 hover:bg-card hover:border-primary transition-all duration-500 group"
+              className="standard-card bg-background/60 border-t border-primary/20 p-8 hover:bg-background hover:border-primary/40 transition-all duration-500 group"
             >
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-6 group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center mb-6 group-hover:border-primary/40 group-hover:bg-primary/5 transition-all duration-300">
                 {/* Fallback simple icons since we can't reliably dynamic import lucide */}
                 <div className="w-4 h-4 bg-primary rounded-[1px] rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
               </div>

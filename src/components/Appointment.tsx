@@ -31,7 +31,6 @@ import { trackBookingStarted, trackBookingSubmitted, trackBookingPersisted, trac
 import { WYLI } from '@/lib/wyli';
 import { SERVICES, getServicesByGender, type WYLI_Service } from '@/lib/services';
 import { useBooking } from '@/contexts/BookingContext';
-import { buildWhatsAppMessage, buildWhatsAppUrl } from '@/lib/whatsapp';
 import { Check, ChevronRight, ChevronLeft, Calendar, Clock, User, Phone, Mail, MessageSquare, Trash2, Plus, Minus } from 'lucide-react';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -223,7 +222,7 @@ export default function Appointment() {
           }
         } catch (err) {
           console.error('[Booking] Google Sheets error:', err);
-          setErrMsg(err instanceof Error ? err.message : 'Could not save booking to our system. Please try again or contact us directly.');
+          setErrMsg(err instanceof Error ? err.message : 'Could not save booking to our system. Please try again or contact us directly on WhatsApp.');
           trackBookingFailed('google_sheets');
           setSending(false);
           isSubmitting.current = false;
@@ -272,7 +271,7 @@ export default function Appointment() {
       clearCart();
     } catch (err) {
       console.error('[Booking] Error:', err);
-      setErrMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again or contact us directly.');
+      setErrMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again or contact us directly on WhatsApp.');
       trackBookingFailed('emailjs');
     } finally {
       setSending(false);
@@ -286,7 +285,7 @@ export default function Appointment() {
 
   return (
     <>
-      <section ref={sectionRef} id="book" className="py-32 bg-card relative overflow-hidden">
+      <section ref={sectionRef} id="book" className="py-32 bg-background relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
 
         <div className="container mx-auto px-6 max-w-4xl relative z-10">
@@ -296,14 +295,14 @@ export default function Appointment() {
               <div key={s} className="flex items-center gap-2">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-xs border ${
-                    step >= s ? 'border-primary bg-primary/10 text-primary' : 'border-white/10 text-muted-foreground'
+                    step >= s ? 'border-primary bg-primary/10 text-primary' : 'border-black/10 text-muted-foreground'
                   }`}
                 >
                   {s}
                 </div>
                 {s < 7 && (
                   <div
-                    className={`w-8 h-px ${step > s ? 'bg-primary' : 'bg-white/10'}`}
+                    className={`w-8 h-px ${step > s ? 'bg-primary' : 'bg-black/10'}`}
                   />
                 )}
               </div>
@@ -334,7 +333,7 @@ export default function Appointment() {
                       goNext();
                     }}
                     className={`px-8 py-4 border transition-all duration-200 ${
-                      gender === g ? 'border-primary bg-primary/10 text-primary' : 'border-white/10 text-foreground hover:border-primary/50'
+                      gender === g ? 'border-primary bg-primary/10 text-primary' : 'border-black/10 text-foreground hover:border-primary/50'
                     }`}
                   >
                     <span className="font-sans text-sm uppercase tracking-widest">{g}</span>
@@ -360,7 +359,7 @@ export default function Appointment() {
                     key={g}
                     onClick={() => setGender(g)}
                     className={`px-3 py-1.5 text-[10px] uppercase tracking-widest border transition-all ${
-                      gender === g ? 'border-primary text-primary' : 'border-white/10 text-muted-foreground'
+                      gender === g ? 'border-primary text-primary' : 'border-black/10 text-muted-foreground'
                     }`}
                   >
                     {g}
@@ -371,7 +370,7 @@ export default function Appointment() {
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
                     className={`px-3 py-1.5 text-[10px] uppercase tracking-widest border transition-all ${
-                      activeCategory === cat ? 'border-primary text-primary' : 'border-white/10 text-muted-foreground'
+                      activeCategory === cat ? 'border-primary text-primary' : 'border-black/10 text-muted-foreground'
                     }`}
                   >
                     {cat}
@@ -383,10 +382,10 @@ export default function Appointment() {
                 {visibleServices.map((svc) => {
                   const inCart = draft.items.find((i) => i.service.id === svc.id);
                   return (
-                    <div
-                      key={svc.id}
-                      className="border border-white/5 hover:border-primary/30 transition-all p-5 bg-background/50 flex flex-col"
-                    >
+                     <div
+                       key={svc.id}
+                       className="border border-black/5 hover:border-primary/30 transition-all p-5 bg-background flex flex-col"
+                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <span className="text-[10px] uppercase tracking-widest text-primary/70">
@@ -405,19 +404,19 @@ export default function Appointment() {
                         </div>
                         {inCart ? (
                           <div className="flex items-center gap-2">
-                            <button
-                              onClick={() => updateQuantity(svc.id, inCart.quantity - 1)}
-                              className="w-7 h-7 border border-white/10 flex items-center justify-center hover:border-primary transition-colors"
-                            >
-                              <Minus size={12} />
-                            </button>
-                            <span className="text-xs w-6 text-center">{inCart.quantity}</span>
-                            <button
-                              onClick={() => updateQuantity(svc.id, inCart.quantity + 1)}
-                              className="w-7 h-7 border border-white/10 flex items-center justify-center hover:border-primary transition-colors"
-                            >
-                              <Plus size={12} />
-                            </button>
+                             <button
+                               onClick={() => updateQuantity(svc.id, inCart.quantity - 1)}
+                               className="w-7 h-7 border border-black/10 flex items-center justify-center hover:border-primary transition-colors"
+                             >
+                               <Minus size={12} />
+                             </button>
+                             <span className="text-xs w-6 text-center">{inCart.quantity}</span>
+                             <button
+                               onClick={() => updateQuantity(svc.id, inCart.quantity + 1)}
+                               className="w-7 h-7 border border-black/10 flex items-center justify-center hover:border-primary transition-colors"
+                             >
+                               <Plus size={12} />
+                             </button>
                           </div>
                         ) : (
                           <button
@@ -455,7 +454,7 @@ export default function Appointment() {
                         </button>
                       </div>
                     ))}
-                    <div className="flex justify-between pt-3 border-t border-white/10 text-sm">
+                    <div className="flex justify-between pt-3 border-t border-black/10 text-sm">
                       <span className="text-muted-foreground">Total</span>
                       <span className="text-primary font-medium">₹{totalPrice} · {formatDuration(totalDuration)}</span>
                     </div>
@@ -485,7 +484,7 @@ export default function Appointment() {
               </h2>
               <div className="max-w-md mx-auto space-y-3 mb-8">
                 {draft.items.map((item) => (
-                  <div key={item.service.id} className="flex items-center justify-between border-b border-white/5 pb-3">
+                  <div key={item.service.id} className="flex items-center justify-between border-b border-black/5 pb-3">
                     <div className="text-left">
                       <p className="text-sm text-foreground">{item.service.name}</p>
                       <p className="text-xs text-muted-foreground">₹{item.service.price} × {item.quantity}</p>
@@ -542,7 +541,7 @@ export default function Appointment() {
                       const d = new Date();
                       setDate(d.toISOString().split('T')[0]);
                     }}
-                    className="px-4 py-2 text-xs border border-white/10 hover:border-primary transition-colors"
+                    className="px-4 py-2 text-xs border border-black/10 hover:border-primary transition-colors"
                   >
                     Today
                   </button>
@@ -552,7 +551,7 @@ export default function Appointment() {
                       d.setDate(d.getDate() + 1);
                       setDate(d.toISOString().split('T')[0]);
                     }}
-                    className="px-4 py-2 text-xs border border-white/10 hover:border-primary transition-colors"
+                    className="px-4 py-2 text-xs border border-black/10 hover:border-primary transition-colors"
                   >
                     Tomorrow
                   </button>
@@ -585,7 +584,7 @@ export default function Appointment() {
                       key={t}
                       onClick={() => setTime(t)}
                       className={`py-3 text-xs border transition-all ${
-                        draft.time === t ? 'border-primary bg-primary/10 text-primary' : 'border-white/10 text-muted-foreground hover:border-primary/50'
+                        draft.time === t ? 'border-primary bg-primary/10 text-primary' : 'border-black/10 text-muted-foreground hover:border-primary/50'
                       }`}
                     >
                       {fmtTime(t)}
@@ -694,11 +693,11 @@ export default function Appointment() {
                 Review & <span className="italic text-primary">Confirm</span>
               </h2>
               <div className="max-w-lg mx-auto text-left space-y-4 mb-8">
-                <div className="border-b border-white/5 pb-3">
+                <div className="border-b border-black/5 pb-3">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Category</p>
                   <p className="text-sm text-foreground">{draft.category}</p>
                 </div>
-                <div className="border-b border-white/5 pb-3">
+                <div className="border-b border-black/5 pb-3">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Services</p>
                   {draft.items.map((item) => (
                     <p key={item.service.id} className="text-sm text-foreground">
@@ -706,13 +705,13 @@ export default function Appointment() {
                     </p>
                   ))}
                 </div>
-                <div className="border-b border-white/5 pb-3">
+                <div className="border-b border-black/5 pb-3">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Date & Time</p>
                   <p className="text-sm text-foreground">
                     {fmtDate(draft.date)} at {fmtTime(draft.time)}
                   </p>
                 </div>
-                <div className="border-b border-white/5 pb-3">
+                <div className="border-b border-black/5 pb-3">
                   <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Customer</p>
                   <p className="text-sm text-foreground">
                     {draft.customerName} · {draft.customerPhone}
@@ -734,7 +733,7 @@ export default function Appointment() {
               {errMsg && (
                 <div
                   role="alert"
-                  className="mb-6 flex items-start gap-3 text-sm text-red-400 border border-red-400/20 rounded p-4 bg-red-400/5 max-w-lg mx-auto text-left"
+                  className="mb-6 flex items-start gap-3 text-sm text-red-600 border border-red-200 rounded-none p-4 bg-red-50 max-w-lg mx-auto text-left"
                 >
                   <span>{errMsg}</span>
                 </div>
@@ -760,7 +759,7 @@ export default function Appointment() {
       {/* Success Modal */}
       {successData && (
         <div
-          className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
+          className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) setSuccessData(null);
           }}
@@ -768,7 +767,7 @@ export default function Appointment() {
           aria-modal="true"
           aria-label="Booking Confirmation"
         >
-          <div className="w-full max-w-md bg-background border border-white/10 shadow-2xl relative overflow-hidden">
+          <div className="w-full max-w-md bg-background border border-black/10 shadow-lg relative overflow-hidden">
             <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-primary to-transparent" />
             <div className="p-8 md:p-10 flex flex-col items-center text-center">
               <div className="w-16 h-16 rounded-full border border-primary/50 flex items-center justify-center text-primary mb-6">
@@ -798,7 +797,7 @@ export default function Appointment() {
                   ['Total', `₹${successData.totalPrice}`],
                   ['Duration', formatDuration(successData.totalDuration)],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex items-center justify-between border-b border-white/5 pb-3">
+                  <div key={label} className="flex items-center justify-between border-b border-black/5 pb-3">
                     <span className="font-sans text-[11px] uppercase tracking-widest text-muted-foreground">
                       {label}
                     </span>
